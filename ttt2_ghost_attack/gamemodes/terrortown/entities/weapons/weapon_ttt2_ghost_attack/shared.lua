@@ -46,8 +46,6 @@ SWEP.WorldModel = "models/weapons/w_slam.mdl"
 SWEP.CanBuy = {ROLE_TRAITOR}
 
 SWEP.LimitedStock = true
-SWEP.teamLimited = true
-SWEP.globalLimited = true
 SWEP.Icon = "vgui/ttt/weapon_ghost_attack"
 
 SWEP.EquipMenuData = {
@@ -68,13 +66,20 @@ function SWEP:PrimaryAttack()
         ghostowner1 = self:GetOwner()
         ghostownerteam1 = ghostowner1:GetTeam()
 
+        if ghostattackstarted == true then
+            ghostowner1:ChatPrint("Wait until the first ghost attack is finished!")
+
+            return
+        end
+
         if GetConVar("ttt2_ghost_attack_primary_sound"):GetBool() then
             ghostowner1:EmitSound("ghost_attack1.wav")
+            ghostattackstarted = true
         end
 
         timer.Create("GhostAttackStart", 0.8, 1, function()
             for _, ghostvictim1 in ipairs(player.GetAll()) do
-                if ghostvictim1:Alive() and not (ghostvictim1.IsGhost and ghostvictim1:IsGhost()) and not ghostvictim1:IsSpec() and ghostvictim1:GetTeam() ~= ghostownerteam1 and GetRoundState() == ROUND_ACTIVE and GetRoundState() ~= ROUND_PREP and GetRoundState() ~= ROUND_WAIT then
+                if ghostattackstarted == true and ghostvictim1:Alive() and not (ghostvictim1.IsGhost and ghostvictim1:IsGhost()) and not ghostvictim1:IsSpec() and ghostvictim1:GetTeam() ~= ghostownerteam1 and GetRoundState() == ROUND_ACTIVE and GetRoundState() ~= ROUND_PREP and GetRoundState() ~= ROUND_WAIT then
                     if GetConVar("ttt2_ghost_attack_arrival_sound"):GetBool() then
                         ghostvictim1:EmitSound("ghost_attack3.wav")
                     end
@@ -98,7 +103,7 @@ function SWEP:PrimaryAttack()
 
         timer.Create("GhostAttackTime", GetConVar("ttt2_ghost_attack_ghosts_duration"):GetInt(), 1, function()
             for _, ghostvictim2 in ipairs(player.GetAll()) do
-                if ghostvictim2:Alive() and not (ghostvictim2.IsGhost and ghostvictim2:IsGhost()) and not ghostvictim2:IsSpec() and ghostvictim2:GetTeam() ~= ghostownerteam1 and GetRoundState() == ROUND_ACTIVE and GetRoundState() ~= ROUND_PREP and GetRoundState() ~= ROUND_WAIT then
+                if ghostattackstarted == true and ghostvictim2:Alive() and not (ghostvictim2.IsGhost and ghostvictim2:IsGhost()) and not ghostvictim2:IsSpec() and ghostvictim2:GetTeam() ~= ghostownerteam1 and GetRoundState() == ROUND_ACTIVE and GetRoundState() ~= ROUND_PREP and GetRoundState() ~= ROUND_WAIT then
                     if GetConVar("ttt2_ghost_attack_departure_sound"):GetBool() then
                         ghostvictim2:EmitSound("ghost_attack4.wav")
                     end
@@ -114,6 +119,7 @@ function SWEP:PrimaryAttack()
         timer.Create("GhostAttackSoundRemoval", GetConVar("ttt2_ghost_attack_ghosts_duration"):GetInt() + 8, 1, function()
             for _, ghostvictim3 in ipairs(player.GetAll()) do
                 ghostvictim3:StopSound("ghost_attack4.wav")
+                ghostattackstarted = false
             end
         end)
     end
