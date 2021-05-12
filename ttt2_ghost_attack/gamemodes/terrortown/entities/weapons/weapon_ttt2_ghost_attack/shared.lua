@@ -66,6 +66,12 @@ function SWEP:PrimaryAttack()
         ghostowner1 = self:GetOwner()
         ghostownerteam1 = ghostowner1:GetTeam()
 
+        if GetRoundState() ~= ROUND_ACTIVE or GetRoundState() == ROUND_PREP or GetRoundState() == ROUND_WAIT then
+            ghostowner1:ChatPrint("Round is not active, you can't use this weapon!")
+
+            return
+        end
+
         if ghostattackstarted == true then
             ghostowner1:ChatPrint("Wait until the first ghost attack is finished!")
 
