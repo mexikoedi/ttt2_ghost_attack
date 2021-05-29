@@ -60,8 +60,8 @@ function SWEP:Initialize()
     end
 end
 
-function SWEP:PrimaryAttack()
-    if SERVER then
+if SERVER then
+    function SWEP:PrimaryAttack()
         if not self:CanPrimaryAttack() then return end
         ghostowner1 = self:GetOwner()
         ghostownerteam1 = ghostowner1:GetTeam()
@@ -129,13 +129,10 @@ function SWEP:PrimaryAttack()
             end
         end)
     end
-end
 
-timer.Remove("GhostAttackStart")
-timer.Remove("GhostAttackTime")
-timer.Remove("GhostAttackSoundRemoval")
-
-if SERVER then
+    timer.Remove("GhostAttackStart")
+    timer.Remove("GhostAttackTime")
+    timer.Remove("GhostAttackSoundRemoval")
     SWEP.NextSecondaryAttack = 0
 
     function SWEP:SecondaryAttack()
