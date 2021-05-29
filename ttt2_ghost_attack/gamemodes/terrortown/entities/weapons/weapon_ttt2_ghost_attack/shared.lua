@@ -130,9 +130,6 @@ if SERVER then
         end)
     end
 
-    timer.Remove("GhostAttackStart")
-    timer.Remove("GhostAttackTime")
-    timer.Remove("GhostAttackSoundRemoval")
     SWEP.NextSecondaryAttack = 0
 
     function SWEP:SecondaryAttack()
@@ -208,5 +205,8 @@ if CLIENT then
     end)
 end
 
+timer.Remove("GhostAttackStart")
+timer.Remove("GhostAttackTime")
+timer.Remove("GhostAttackSoundRemoval")
 timer.Remove("GhostAttackGraphics")
 timer.Remove("GhostAttackGraphicsRemoval")
