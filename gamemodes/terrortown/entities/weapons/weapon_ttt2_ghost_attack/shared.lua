@@ -80,8 +80,9 @@ if SERVER then
 
         if GetConVar("ttt2_ghost_attack_primary_sound"):GetBool() then
             ghostowner1:EmitSound("ghost_attack1.wav")
-            ghostattackstarted = true
         end
+
+        ghostattackstarted = true
 
         timer.Create("GhostAttackStart", 0.8, 1, function()
             for _, ghostvictim1 in ipairs(player.GetAll()) do
