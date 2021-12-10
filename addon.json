@@ -1,8 +1,11 @@
 {
-    "title": "TTT2 Ghost Attack",
+    "title": "[TTT2] Ghost Attack [WEAPON]",
     "type": "weapon",
-    "tags": "fun",
-    "description": "A ghost attack will start for everyone who is not in your team. They sight will be disturbed by ghosts.",
+    "tags": [
+        "realism",
+        "fun"
+    ],
+    "description": "Use it to summon ghosts which will disturb your enemies sight. You and your team are immune.",
     "ignore": [
         "*.psd",
         "*.vcproj",
