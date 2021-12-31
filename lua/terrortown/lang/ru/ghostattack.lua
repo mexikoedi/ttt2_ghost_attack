@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("ru")
+local L = LANG.GetLanguageTableReference("ru")
 L["ttt2_ghost_attack_name"] = "Призрачная атака"
 L["ttt2_ghost_attack_desc"] = "Используйте это для вызова призраков, которые будут мешать вашим врагам видеть. Вы и ваша команда имеют иммунитет."
 L["ttt2_ghost_attack_help1"] = "{primaryfire}: Призвать призраков."

@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("de")
+local L = LANG.GetLanguageTableReference("de")
 L["ttt2_ghost_attack_name"] = "Geisterangriff"
 L["ttt2_ghost_attack_desc"] = "Beschwöre damit Geister, die die Sicht deiner Feinde stören. Sie und Ihr Team sind immun."
 L["ttt2_ghost_attack_help1"] = "{primaryfire} Beschwöre die Geister."
