@@ -78,7 +78,7 @@ if SERVER then
         ghostattackstarted = true
         timer.Create("GhostAttackStart", 0.8, 1, function()
             for _, ghostvictim1 in ipairs(player.GetAll()) do
-                if ghostattackstarted == true and ghostvictim1:IsActive() and ghostvictim1:GetTeam() ~= ghostownerteam1 and not ghostvictim1.IsGhost and ghostvictim1:IsGhost() then
+                if ghostattackstarted == true and ghostvictim1:IsActive() and ghostvictim1:GetTeam() ~= ghostownerteam1 and not (ghostvictim1.IsGhost and ghostvictim1:IsGhost()) then
                     if GetConVar("ttt2_ghost_attack_arrival_sound"):GetBool() then ghostvictim1:EmitSound("ghost_attack3.wav") end
                     if GetConVar("ttt2_ghost_attack_arrival_popup"):GetBool() then
                         net.Start("ttt2_ghost_attack_epop_1")
@@ -97,7 +97,7 @@ if SERVER then
         if self:Clip1() <= 0 then self:Remove() end
         timer.Create("GhostAttackTime", GetConVar("ttt2_ghost_attack_ghosts_duration"):GetInt(), 1, function()
             for _, ghostvictim2 in ipairs(player.GetAll()) do
-                if ghostattackstarted == true and ghostvictim2:IsActive() and ghostvictim2:GetTeam() ~= ghostownerteam1 and not ghostvictim2.IsGhost and ghostvictim2:IsGhost() then
+                if ghostattackstarted == true and ghostvictim2:IsActive() and ghostvictim2:GetTeam() ~= ghostownerteam1 and not (ghostvictim2.IsGhost and ghostvictim2:IsGhost()) then
                     if GetConVar("ttt2_ghost_attack_departure_sound"):GetBool() then ghostvictim2:EmitSound("ghost_attack4.wav") end
                     if GetConVar("ttt2_ghost_attack_departure_popup"):GetBool() then
                         net.Start("ttt2_ghost_attack_epop_2")
