@@ -56,7 +56,7 @@ SWEP.EquipMenuData = {
 }
 
 function SWEP:Initialize()
-    if CLIENT then self:AddHUDHelp("ttt2_ghost_attack_help1", "ttt2_ghost_attack_help2", true) end
+    if CLIENT then self:AddTTT2HUDHelp("ttt2_ghost_attack_help1", "ttt2_ghost_attack_help2") end
 end
 
 if SERVER then
