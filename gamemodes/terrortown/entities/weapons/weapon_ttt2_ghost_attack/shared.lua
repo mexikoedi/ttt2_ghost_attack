@@ -153,6 +153,63 @@ if SERVER then
 end
 
 if CLIENT then
+    function SWEP:AddToSettingsMenu(parent)
+        local form = vgui.CreateTTT2Form(parent, "header_equipment_additional")
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_primary_sound",
+            label = "label_ghost_attack_primary_sound"
+        })
+
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_secondary_sound",
+            label = "label_ghost_attack_secondary_sound"
+        })
+
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_arrival_sound",
+            label = "label_ghost_attack_arrival_sound"
+        })
+
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_departure_sound",
+            label = "label_ghost_attack_departure_sound"
+        })
+
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_arrival_popup",
+            label = "label_ghost_attack_arrival_popup"
+        })
+
+        form:MakeSlider({
+            serverConvar = "ttt2_ghost_attack_arrival_popup_duration",
+            label = "label_ghost_attack_arrival_popup_duration",
+            min = 0,
+            max = 15,
+            decimal = 0
+        })
+
+        form:MakeCheckBox({
+            serverConvar = "ttt2_ghost_attack_departure_popup",
+            label = "label_ghost_attack_departure_popup"
+        })
+
+        form:MakeSlider({
+            serverConvar = "ttt2_ghost_attack_departure_popup_duration",
+            label = "label_ghost_attack_departure_popup_duration",
+            min = 0,
+            max = 15,
+            decimal = 0
+        })
+
+        form:MakeSlider({
+            serverConvar = "ttt2_ghost_attack_ghosts_duration",
+            label = "label_ghost_attack_ghosts_duration",
+            min = 0,
+            max = 30,
+            decimal = 0
+        })
+    end
+
     net.Receive("ttt2_ghost_attack_epop_1", function()
         ghost_attack_duration1 = net.ReadInt(32)
         EPOP:AddMessage({
