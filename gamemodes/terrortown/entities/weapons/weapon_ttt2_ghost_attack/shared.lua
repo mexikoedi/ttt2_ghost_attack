@@ -1,5 +1,5 @@
 local songs = {}
-local song_path = "secondary/"
+local song_path = "secondary/ghost_attack"
 if SERVER then
     AddCSLuaFile()
     resource.AddFile("materials/vgui/ttt/weapon_ghost_attack.vmt")
@@ -63,6 +63,7 @@ if SERVER then
     function SWEP:PrimaryAttack()
         if not self:CanPrimaryAttack() then return end
         ghostowner1 = self:GetOwner()
+        if not IsValid(ghostowner1) then return end
         ghostownerteam1 = ghostowner1:GetTeam()
         if GetRoundState() ~= ROUND_ACTIVE then
             ghostowner1:ChatPrint("Round is not active, you can't use this weapon!")
@@ -120,8 +121,9 @@ if SERVER then
     SWEP.NextSecondaryAttack = 0
     function SWEP:SecondaryAttack()
         if self.NextSecondaryAttack > CurTime() then return end
-        self.currentOwner = self:GetOwner()
         self.NextSecondaryAttack = CurTime() + self.Secondary.Delay
+        self.currentOwner = self:GetOwner()
+        if not IsValid(self.currentOwner) then return end
         if GetConVar("ttt2_ghost_attack_secondary_sound"):GetBool() and not self.LoopSound then
             self.LoopSound = CreateSound(self.currentOwner, Sound(song_path .. songs[math.random(#songs)]))
             if self.LoopSound then self.LoopSound:Play() end
