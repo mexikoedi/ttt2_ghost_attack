@@ -1,5 +1,5 @@
 local songs = {}
-local song_path = "secondary/ghost_attack"
+local song_path = "secondary_ghost_attack/"
 if SERVER then
     AddCSLuaFile()
     resource.AddFile("materials/vgui/ttt/weapon_ghost_attack.vmt")
