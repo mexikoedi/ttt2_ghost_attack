@@ -140,7 +140,6 @@ if SERVER then
     function SWEP:OnRemove()
         if IsValid(self.currentOwner) then
             self:KillSounds()
-            self.currentOwner:ConCommand("lastinv")
         end
     end
 
