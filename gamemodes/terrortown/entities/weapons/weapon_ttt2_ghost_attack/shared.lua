@@ -138,9 +138,7 @@ if SERVER then
     end
 
     function SWEP:OnRemove()
-        if IsValid(self.currentOwner) then
-            self:KillSounds()
-        end
+        if IsValid(self.currentOwner) then self:KillSounds() end
     end
 
     function SWEP:Holster()
@@ -177,7 +175,7 @@ if CLIENT then
             label = "label_ghost_attack_departure_sound"
         })
 
-        form:MakeCheckBox({
+        local masterArrival = form:MakeCheckBox({
             serverConvar = "ttt2_ghost_attack_arrival_popup",
             label = "label_ghost_attack_arrival_popup"
         })
@@ -187,10 +185,11 @@ if CLIENT then
             label = "label_ghost_attack_arrival_popup_duration",
             min = 0,
             max = 15,
-            decimal = 0
+            decimal = 0,
+            master = masterArrival
         })
 
-        form:MakeCheckBox({
+        local masterDeparture = form:MakeCheckBox({
             serverConvar = "ttt2_ghost_attack_departure_popup",
             label = "label_ghost_attack_departure_popup"
         })
@@ -200,7 +199,8 @@ if CLIENT then
             label = "label_ghost_attack_departure_popup_duration",
             min = 0,
             max = 15,
-            decimal = 0
+            decimal = 0,
+            master = masterDeparture
         })
 
         form:MakeSlider({
