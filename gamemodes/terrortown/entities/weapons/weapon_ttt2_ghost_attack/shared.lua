@@ -81,7 +81,7 @@ if SERVER then
         ghostowner1:LagCompensation(true)
         timer.Create("GhostAttackStart", 0.8, 1, function()
             for _, ghostvictim1 in ipairs(allPlayers) do
-                if ghostattackstarted == true and ghostvictim1:IsActive() and ghostvictim1:GetTeam() ~= ghostownerteam1 and not (ghostvictim1.IsGhost and ghostvictim1:IsGhost()) then
+                if IsValid(ghostvictim1) and ghostattackstarted == true and ghostvictim1:IsActive() and ghostvictim1:GetTeam() ~= ghostownerteam1 and not (ghostvictim1.IsGhost and ghostvictim1:IsGhost()) then
                     if GetConVar("ttt2_ghost_attack_arrival_sound"):GetBool() then ghostvictim1:EmitSound("ghost_attack3.wav") end
                     if GetConVar("ttt2_ghost_attack_arrival_popup"):GetBool() then
                         net.Start("ttt2_ghost_attack_epop_1")
@@ -101,7 +101,7 @@ if SERVER then
         ghostowner1:LagCompensation(false)
         timer.Create("GhostAttackTime", GetConVar("ttt2_ghost_attack_ghosts_duration"):GetInt(), 1, function()
             for _, ghostvictim2 in ipairs(allPlayers) do
-                if ghostattackstarted == true and ghostvictim2:IsActive() and ghostvictim2:GetTeam() ~= ghostownerteam1 and not (ghostvictim2.IsGhost and ghostvictim2:IsGhost()) then
+                if IsValid(ghostvictim2) and ghostattackstarted == true and ghostvictim2:IsActive() and ghostvictim2:GetTeam() ~= ghostownerteam1 and not (ghostvictim2.IsGhost and ghostvictim2:IsGhost()) then
                     if GetConVar("ttt2_ghost_attack_departure_sound"):GetBool() then ghostvictim2:EmitSound("ghost_attack4.wav") end
                     if GetConVar("ttt2_ghost_attack_departure_popup"):GetBool() then
                         net.Start("ttt2_ghost_attack_epop_2")
@@ -114,9 +114,10 @@ if SERVER then
 
         timer.Create("GhostAttackSoundRemoval", GetConVar("ttt2_ghost_attack_ghosts_duration"):GetInt() + 8, 1, function()
             for _, ghostvictim3 in ipairs(allPlayers) do
-                ghostvictim3:StopSound("ghost_attack4.wav")
-                ghostattackstarted = false
+                if IsValid(ghostvictim3) then ghostvictim3:StopSound("ghost_attack4.wav") end
             end
+
+            ghostattackstarted = false
         end)
     end
 
