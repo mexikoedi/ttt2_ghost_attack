@@ -37,8 +37,8 @@ SWEP.AutoSpawnable = false
 SWEP.Slot = 7
 SWEP.ViewModelFlip = false
 SWEP.ViewModelFOV = 54
-SWEP.AllowDrop = false
-SWEP.AllowPickup = false
+SWEP.AllowDrop = true
+SWEP.AllowPickup = true
 SWEP.InLoadoutFor = nil
 SWEP.IsSilent = false
 SWEP.Primary.ClipSize = 1
@@ -153,7 +153,6 @@ if SERVER then
 
     function SWEP:OnDrop()
         if IsValid(self.currentOwner) then self:KillSounds() end
-        self:Remove()
     end
 end
 
